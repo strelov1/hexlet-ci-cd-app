@@ -1,16 +1,18 @@
-name: Alert parent repository on push
-on: push
+name: Run Deploy
+on:
+  push:
+    branches:    
+      - master
 
 jobs:
   build:
-    name: Dispatch to `other-repo`
+    name: Dispatch to deploy
     runs-on: ubuntu-latest
     steps:
       - name: Emit repository_dispatch
         uses: mvasigh/dispatch-action@main
         with:
-          # You should create a personal access token and store it in your repository
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           repo: hexlet-ci-cd-deploy-app
           owner: strelov1
-          event_type: sample_push
+          event_type: deploy
